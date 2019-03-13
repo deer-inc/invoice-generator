@@ -1,0 +1,70 @@
+{
+  "configVersion": 1,
+  "timestamp": 1552499515156,
+  "index": "/invoice-generator/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/invoice-generator/es2015-polyfills.c5dd28b362270c767b34.js",
+        "/invoice-generator/favicon.ico",
+        "/invoice-generator/index.html",
+        "/invoice-generator/main.91bd7682669f273d0915.js",
+        "/invoice-generator/polyfills.8bbb231b43165d65d357.js",
+        "/invoice-generator/runtime.26209474bfa8dc87a77c.js",
+        "/invoice-generator/styles.1d5c0910a5fd83289843.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/invoice-generator/assets/cover.png",
+        "/invoice-generator/assets/github.svg",
+        "/invoice-generator/assets/icons/icon-144x144.png",
+        "/invoice-generator/assets/icons/icon-192x192.png",
+        "/invoice-generator/assets/icons/icon-512x512.png",
+        "/invoice-generator/assets/icons/icon-72x72.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/invoice-generator/assets/cover.png": "c840fe3867fd30c52d6f658577f1c5e7209dd247",
+    "/invoice-generator/assets/github.svg": "d72a8270e65f1b4a65f46e5c48d8fb37ee1304f5",
+    "/invoice-generator/assets/icons/icon-144x144.png": "ba0f7b04df76e7fd5f72d7dd444399a3e1b16e6b",
+    "/invoice-generator/assets/icons/icon-192x192.png": "c9d45dfaa1eed8b5bacbafc157eec5e7264dbdb1",
+    "/invoice-generator/assets/icons/icon-512x512.png": "0e4dc42cc9b79b8256d8d3d8ea7c4a3fb8b86d52",
+    "/invoice-generator/assets/icons/icon-72x72.png": "97435c9cc3a98c5de4907a826049fdcc8ec4db1a",
+    "/invoice-generator/es2015-polyfills.c5dd28b362270c767b34.js": "b7a81c61d32b0b12737f0c13f45973ba391cd7f9",
+    "/invoice-generator/favicon.ico": "90712c6000c07e7cef10ac2e77ef6b105b17b877",
+    "/invoice-generator/index.html": "5fe4233c13ce92b20dbb99f9ec20e640fd6ebb3d",
+    "/invoice-generator/main.91bd7682669f273d0915.js": "4056f96054d5e8d27ca423494d8a2883c86160be",
+    "/invoice-generator/polyfills.8bbb231b43165d65d357.js": "ffa449995bf2eba2ccd0a002417214f7eb75e7b5",
+    "/invoice-generator/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/invoice-generator/styles.1d5c0910a5fd83289843.css": "e4c23356e0de317de71110547deb349ef79d330a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
