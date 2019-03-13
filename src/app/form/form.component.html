@@ -47,6 +47,7 @@
             autocomplete="nope"
             formControlName="zipCode"
           />
+          <span matPrefix>〒&nbsp;</span>
         </mat-form-field>
         <mat-form-field>
           <mat-label>住所</mat-label>
@@ -55,7 +56,7 @@
             type="text"
             placeholder="東京都新宿区新宿1-1-1"
             autocomplete="nope"
-            formControlName="streetName1"
+            formControlName="streetName"
           />
         </mat-form-field>
       </div>
@@ -88,6 +89,19 @@
             autocomplete="nope"
             formControlName="bank"
           />
+          <span matSuffix>銀行</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>支店名</mat-label>
+          <input
+            matInput
+            name="branch"
+            type="text"
+            placeholder="デモ"
+            autocomplete="nope"
+            formControlName="branch"
+          />
+          <span matSuffix>支店</span>
         </mat-form-field>
         <mat-form-field>
           <mat-label>名義</mat-label>
@@ -96,7 +110,7 @@
             type="text"
             placeholder="株式会社デモ"
             autocomplete="organization"
-            formControlName="bank"
+            formControlName="name"
           />
         </mat-form-field>
         <mat-form-field>
@@ -204,6 +218,7 @@
             formControlName="zipCode"
             required
           />
+          <span matPrefix>〒&nbsp;</span>
         </mat-form-field>
         <mat-form-field>
           <mat-label>住所</mat-label>
@@ -212,7 +227,7 @@
             type="text"
             placeholder="東京都新宿区新宿1-1-1"
             autocomplete="street-address"
-            formControlName="streetName1"
+            formControlName="streetName"
             required
           />
         </mat-form-field>

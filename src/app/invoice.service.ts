@@ -4,12 +4,12 @@ import { Subject, BehaviorSubject } from 'rxjs';
 export interface Client {
   name: string;
   zipCode: string;
-  streetName1: string;
-  streetName2: string;
+  streetName: string;
 }
 
 export interface TransferAccount {
   bank: string;
+  branch: string;
   name: string;
   number: number;
 }
@@ -24,8 +24,7 @@ export interface Menu {
 export interface Company {
   name: string;
   zipCode: string;
-  streetName1: string;
-  streetName2: string;
+  streetName: string;
   logo: string;
   tel: string;
   seal: string;

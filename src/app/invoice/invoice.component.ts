@@ -12,6 +12,12 @@ export class InvoiceComponent implements OnInit {
 
   constructor(private invoiceService: InvoiceService) { }
 
+  get totalCost() {
+    return this.data && this.data.menues
+      .map(menu => menu.count * menu.unitCost)
+      .reduce((pv, cv) => pv + cv);
+  }
+
   ngOnInit() {
   }
 

@@ -35,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, InvoiceComponent, FormComponent],
@@ -74,7 +75,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    RouterModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]

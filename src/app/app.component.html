@@ -1,30 +1,33 @@
-<mat-toolbar color="primary">
-  <span>Invoice</span>
-  <span class="spacer"></span>
-  <button mat-raised-button color="accent" (click)="downloadPDF()" [disabled]="!(valid$ | async)">
-    <mat-icon>picture_as_pdf</mat-icon>
-    ダウンロード
-  </button>
-  <a href="https://github.com/deer-inc/invoice-generator" target="_blank" mat-button>
-    <img src="./assets/github.svg" alt="" class="github">
-    GitHub
-  </a>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="clearCache()">
-      <mat-icon class="mat-18">delete_sweep</mat-icon>
-      <span>キャッシュをクリア</span>
+<div class="noprint">
+  <mat-toolbar color="primary">
+    <span>Invoice</span>
+    <span class="spacer"></span>
+    <!-- [disabled]="!(valid$ | async)" -->
+    <button mat-raised-button color="accent" (click)="downloadPDF(invoice)">
+      <mat-icon>picture_as_pdf</mat-icon>
+      ダウンロード
     </button>
-  </mat-menu>
-</mat-toolbar>
+    <a href="https://github.com/deer-inc/invoice-generator" target="_blank" mat-button>
+      <img src="./assets/github.svg" alt="" class="github">
+      GitHub
+    </a>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="clearCache()">
+        <mat-icon class="mat-18">delete_sweep</mat-icon>
+        <span>キャッシュをクリア</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
 
 <div class="layout">
   <div class="layout__form noprint">
     <app-form (dataChanged)="data = $event"></app-form>
   </div>
-  <div class="layout__main">
+  <div class="layout__main" #invoice>
     <app-invoice [data]="data"></app-invoice>
   </div>
 </div>

@@ -18,6 +18,7 @@ import {
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -46,7 +47,8 @@ export class FormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute
   ) {
     this.form = fb.group({
       id: Date.now(),
@@ -58,12 +60,13 @@ export class FormComponent implements OnInit {
       client: fb.group({
         name: ['', Validators.required],
         zipCode: '',
-        streetName1: ''
+        streetName: ''
       }),
       transferAccount: fb.group(
         {
           bank: [''],
           name: [''],
+          branch: [''],
           number: ['']
         },
         Validators.required
@@ -71,7 +74,7 @@ export class FormComponent implements OnInit {
       company: fb.group({
         name: ['', Validators.required],
         zipCode: ['', Validators.required],
-        streetName1: ['', Validators.required],
+        streetName: ['', Validators.required],
         logo: '',
         tel: ['', Validators.required],
         seal: ''
@@ -97,6 +100,16 @@ export class FormComponent implements OnInit {
     if (!this.menues.length) {
       this.addMenu();
     }
+
+    this.route.queryParams.subscribe(params => {
+      if (params.title && params.unit && params.unitCost && params.count) {
+        this.form.patchValue({
+          menues: [
+            params
+          ]
+        });
+      }
+    });
   }
 
   addMenu() {

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Invoice, InvoiceService } from './invoice.service';
 import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,5 +15,8 @@ export class AppComponent {
 
   clearCache() {
     localStorage.clear();
+  }
+
+  downloadPDF(element) {
   }
 }
