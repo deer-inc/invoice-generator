@@ -64,10 +64,10 @@ export class FormComponent implements OnInit {
       }),
       transferAccount: fb.group(
         {
-          bank: [''],
-          name: [''],
-          branch: [''],
-          number: ['']
+          bank: ['', Validators.required],
+          name: ['', Validators.required],
+          branch: ['', Validators.required],
+          number: ['', Validators.required]
         },
         Validators.required
       ),

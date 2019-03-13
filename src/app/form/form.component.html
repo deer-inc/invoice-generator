@@ -18,6 +18,7 @@
           formControlName="date"
           autocomplete="off"
           [matDatepicker]="myDatepicker"
+          required
         />
         <mat-datepicker-toggle
           matSuffix
@@ -70,6 +71,7 @@
           autocomplete="off"
           formControlName="limit"
           [matDatepicker]="limitDp"
+          required
         />
         <mat-hint>翌月末が一般的です</mat-hint>
         <mat-datepicker-toggle
@@ -88,6 +90,7 @@
             placeholder="デモ銀行"
             autocomplete="off"
             formControlName="bank"
+            required
           />
           <span matSuffix>銀行</span>
         </mat-form-field>
@@ -100,6 +103,7 @@
             placeholder="デモ"
             autocomplete="off"
             formControlName="branch"
+            required
           />
           <span matSuffix>支店</span>
         </mat-form-field>
@@ -111,6 +115,7 @@
             placeholder="株式会社デモ"
             autocomplete="organization"
             formControlName="name"
+            required
           />
         </mat-form-field>
         <mat-form-field>
@@ -122,6 +127,7 @@
             placeholder="1111111"
             autocomplete="off"
             formControlName="number"
+            required
           />
         </mat-form-field>
       </div>
