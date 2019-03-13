@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1552500591984,
+  "timestamp": 1552501055142,
   "index": "/invoice-generator/index.html",
   "assetGroups": [
     {
@@ -43,7 +43,7 @@
     "/invoice-generator/assets/icons/icon-72x72.png": "97435c9cc3a98c5de4907a826049fdcc8ec4db1a",
     "/invoice-generator/es2015-polyfills.c5dd28b362270c767b34.js": "b7a81c61d32b0b12737f0c13f45973ba391cd7f9",
     "/invoice-generator/favicon.ico": "90712c6000c07e7cef10ac2e77ef6b105b17b877",
-    "/invoice-generator/index.html": "676a324cd1292dfa688417209fa5957a573342bd",
+    "/invoice-generator/index.html": "cdcee276f035fd454b5d02217ddc14f74237b7e7",
     "/invoice-generator/main.91bd7682669f273d0915.js": "4056f96054d5e8d27ca423494d8a2883c86160be",
     "/invoice-generator/polyfills.8bbb231b43165d65d357.js": "ffa449995bf2eba2ccd0a002417214f7eb75e7b5",
     "/invoice-generator/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
