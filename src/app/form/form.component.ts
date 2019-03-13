@@ -1,33 +1,42 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Invoice } from '../invoice.service';
+import { Invoice, InvoiceService } from '../invoice.service';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
+import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'ja-JP'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class FormComponent implements OnInit {
 
   @Output() dataChanged: EventEmitter<Invoice> = new EventEmitter<Invoice>();
 
   form: FormGroup;
+  target$: Observable<string> = this.invoiceService.editTarget$;
 
   get menues(): FormArray {
     return this.form.get('menues') as FormArray;
   }
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private invoiceService: InvoiceService
   ) {
     this.form = fb.group({
       id: Date.now(),
-      date: Date.now(),
+      date: new Date(),
       client: fb.group({
         name: ['', Validators.required],
         zipCode: '',
         streetName1: '',
-        streetName2: '',
       }),
       transferAccount: fb.group({
         bank: [''],
@@ -38,7 +47,6 @@ export class FormComponent implements OnInit {
         name: ['', Validators.required],
         zipCode: ['', Validators.required],
         streetName1: ['', Validators.required],
-        streetName2: '',
         logo: '',
         tel: ['', Validators.required],
         seal: '',
@@ -52,8 +60,7 @@ export class FormComponent implements OnInit {
         }, Validators.required)
       ]),
       note: ''
-    })
-
+    });
 
     this.form.valueChanges.subscribe((value: Invoice) => {
       this.dataChanged.emit(value);
@@ -61,6 +68,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataChanged.emit(this.form.value);
   }
 
 }

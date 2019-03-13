@@ -1,4 +1,168 @@
-<form>
-  <input [matDatepicker]="myDatepicker">
-  <mat-datepicker #myDatepicker></mat-datepicker>
+<form [formGroup]="form" class="form">
+  <ng-container [ngSwitch]="target$ | async">
+    <div *ngSwitchCase="'date'">
+      <mat-form-field>
+        <mat-label>請求書ID</mat-label>
+        <input
+          matInput
+          type="text"
+          autocomplete="nope"
+          formControlName="id"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>作成日</mat-label>
+        <input
+          matInput
+          formControlName="date"
+          autocomplete="nope"
+          [matDatepicker]="myDatepicker"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="myDatepicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div *ngSwitchCase="'client'">
+      <div formGroupName="client">
+        <mat-form-field>
+          <mat-label>クライアント名</mat-label>
+          <input
+            matInput
+            type="text"
+            autocomplete="nope"
+            formControlName="name"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>郵便番号</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="222-2222"
+            autocomplete="nope"
+            formControlName="zipCode"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>住所</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="東京都新宿区新宿1-1-1"
+            autocomplete="nope"
+            formControlName="streetName1"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngSwitchCase="'transfer'">
+      <div formGroupName="transferAccount">
+        <mat-form-field>
+          <mat-label>銀行</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="デモ銀行"
+            autocomplete="nope"
+            formControlName="bank"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>名義</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="株式会社デモ"
+            autocomplete="nope"
+            formControlName="bank"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>口座番号</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="1111111"
+            autocomplete="nope"
+            formControlName="number"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngSwitchCase="'company'">
+      <div formGroupName="company">
+        <mat-form-field>
+          <mat-label>会社名</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="株式会社デモ"
+            autocomplete="organization"
+            formControlName="name"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>郵便番号</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="222-2222"
+            autocomplete="postal-code"
+            formControlName="zipCode"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>住所</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="東京都新宿区新宿1-1-1"
+            autocomplete="street-address"
+            formControlName="streetName1"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>ロゴ</mat-label>
+          <input
+            matInput
+            type="text"
+            autocomplete="nope"
+            formControlName="logo"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>印鑑</mat-label>
+          <input
+            matInput
+            type="text"
+            autocomplete="nope"
+            formControlName="seal"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>電話番号</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="新宿ダミービル3F"
+            autocomplete="tel"
+            formControlName="tel"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngSwitchCase="'note'">
+      <mat-form-field>
+        <textarea matInput formControlName="note" rows="10"></textarea>
+      </mat-form-field>
+    </div>
+    <p *ngSwitchDefault>
+      編集要素を選択してください。
+    </p>
+  </ng-container>
 </form>

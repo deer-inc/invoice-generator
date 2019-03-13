@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 export interface Client {
   name: string;
@@ -45,5 +46,12 @@ export interface Invoice {
 })
 export class InvoiceService {
 
+  editTargetSource: Subject<string> = new BehaviorSubject<string>(null);
+  editTarget$ = this.editTargetSource.asObservable();
+
   constructor() { }
+
+  setTarget(target: string) {
+    this.editTargetSource.next(target);
+  }
 }

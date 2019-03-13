@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Invoice } from '../invoice.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Invoice, InvoiceService } from '../invoice.service';
 
 @Component({
   selector: 'app-invoice',
@@ -8,11 +8,15 @@ import { Invoice } from '../invoice.service';
 })
 export class InvoiceComponent implements OnInit {
 
-  data: Invoice;
+  @Input() data: Invoice;
 
-  constructor() { }
+  constructor(private invoiceService: InvoiceService) { }
 
   ngOnInit() {
+  }
+
+  setTarget(target: string) {
+    this.invoiceService.setTarget(target);
   }
 
 }

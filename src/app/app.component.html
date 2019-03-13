@@ -3,6 +3,6 @@
     <app-form (dataChanged)="data = $event"></app-form>
   </div>
   <div class="layout__main">
-    <app-invoice *ngIf="data" [data]="data"></app-invoice>
+    <app-invoice [data]="data"></app-invoice>
   </div>
 </div>

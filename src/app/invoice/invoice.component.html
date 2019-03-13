@@ -1,85 +1,105 @@
-<h1>請求書</h1>
-<div class="header">
-  <div class="header__left">
-    <h2 class="client">{{data.client?.name}}御中</h2>
-    <div *ngIf="data.client?.zipCode && data.client?.street-name1" class="client-detail">
-      <p>{{data.client?.zipCode}}</p>
-      <p *ngIf="data.client?.streetName1">{{data.client?.streetName1}}</p>
-      <p *ngIf="data.client?.streetName2">{{data.client?.streetName2}}</p>
+<mat-card>
+  <h1>請求書</h1>
+  <div class="header">
+    <div class="header__left">
+      <div class="editable" (click)="setTarget('client')" [class.invalidGroup]="!data?.client?.name">
+        <h2 class="client">{{ data?.client?.name }}御中</h2>
+        <p class="client-detail" *ngIf="data?.client?.zipCode && data?.client?.streetName1">
+          <span class="zipcode">{{ data?.client?.zipCode }}</span>
+          <span>{{ data?.client?.streetName1 }}</span>
+        </p>
+      </div>
+      <p>下記の通りご請求申し上げます。</p>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>小計</th>
+            <th>消費税</th>
+            <th class="total-cost">合計金額</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ data?.totalCost | number:'1.0-0' }}円</td>
+            <td>{{ data?.tax | number:'1.0-0' }}円</td>
+            <td class="total-cost">
+              {{ data?.totalCost + tax | number:'1.0-0' }}円
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="transfer-table editable" (click)="setTarget('transfer')"
+      [class.invalidGroup]="!data?.limitDate || !data?.transferAccount?.bank || !data?.transferAccount?.name || !!data?.transferAccount?.number">
+        <tbody>
+          <tr>
+            <th>振込期日</th>
+            <th>{{ data?.limitDate | date: 'yyyy年MM月dd日' }}</th>
+          </tr>
+          <tr>
+            <th>振込先</th>
+            <th>
+              <span>{{ data?.transferAccount?.bank }}</span>
+              <span>{{ data?.transferAccount?.name }}</span>
+              <span>{{ data?.transferAccount?.number }}</span>
+            </th>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <p>下記の通りご請求申し上げます。</p>
-    <table class="summary-table">
+    <div class="header__right">
+      <dl class="invoice-detail editable" (click)="setTarget('date')" [class.invalidGroup]="!data?.date || !data?.id">
+        <dt>日付</dt>
+        <dd>{{ data?.date | date: 'yyyy年MM月dd日' }}</dd>
+        <dt>請求書番号</dt>
+        <dd>{{ data?.id }}</dd>
+      </dl>
+      <p
+        class="company-detail editable" (click)="setTarget('company')"
+        [style.background-image]="data?.company?.seal && 'url(' + data?.company?.seal + ')'"
+        [class.invalidGroup]="!data?.company?.name || !data?.company?.zipCode || !data?.company?.streetName || !data?.company?.tel"
+      >
+        <span>{{ data?.company?.name }}</span>
+        <span *ngIf="data?.company?.zipCode" class="zipcode">{{ data?.company?.zipCode }}</span>
+        <span *ngIf="streetName1">{{ data?.company?.streetName1 }}</span>
+      </p>
+      <img
+        class="company-logo"
+        *ngIf="data?.company?.logo"
+        [src="data?.company?.logo"
+        alt="ロゴ"
+      />
+    </div>
+  </div>
+  <div class="body">
+    <table class="menues editable" (click)="setTarget('menu')" [class.invalidGroup]="!data?.menues?.length">
       <thead>
         <tr>
-          <th>小計</th>
-          <th>消費税</th>
-          <th class="total-cost">合計金額</th>
+          <th>詳細</th>
+          <th>数量</th>
+          <th>単価</th>
+          <th>金額</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{{data.totalCost | number:1.0-0}}円</td>
-          <td>{{data.tax | number:1.0-0}}円</td>
-          <td class="total-cost">{{data.totalCost + tax | number:1.0-0}}円</td>
+        <tr *ngIf="!data?.menues?.length">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr *ngFor="let menu of data?.menues">
+          <td>{{ menu.title }}</td>
+          <td>{{ (menu.count | number:'1.0-2') + menu.unit }}</td>
+          <td>{{ menu.unitCost | number: '1.0-0' }}</td>
+          <td>{{ menu.unit * menu.unitCost | number:'1.0-0' }}</td>
         </tr>
       </tbody>
     </table>
-    <table class="transfer-table">
-      <tbody>
-        <tr>
-          <th>振込期日</th>
-          <th>{{data.limitDate | date:'yyyy年MM月dd日'}}</th>
-        </tr>
-        <tr>
-          <th>振込先</th>
-          <th>
-            <span>{{data.transferAccount?.bank}}</span>
-            <span>{{data.transferAccount?.name}}</span>
-            <span>{{data.transferAccount?.number}}</span>
-          </th>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="header__right">
-    <dl class="invoice-detail">
-      <dt>日付</dt>
-      <dd>{{data.date | date:'yyyy年MM月dd日'}}</dd>
-      <dt>請求書番号</dt>
-      <dd>{{data.id}}</dd>
-    </dl>
-    <p class="company-detail" [style.background-image]="'url(' + data.company?.seal + ')'">
-      <span>{{data.company?.name}}</span>
-      <span>{{data.company?.zipCode}}</span>
-      <span *ngIf="streetName1">{{data.company?.streetName1}}</span>
-      <span *ngIf="streetName2">{{data.company?.streetName2}}</span>
-    </p>
-    <img class="company-logo" *ngIf="data.company?.logo" [src="data.company?.logo" alt="ロゴ">
-  </div>
-</div>
-<div class="body">
-  <table>
-    <thead>
-      <tr>
-        <th>詳細</th>
-        <th>数量</th>
-        <th>単価</th>
-        <th>金額</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let menu of data.menues">
-        <td>{{menu.title}}</td>
-        <td>{{(menu.count | number:1.0-2) + menu.unit}}</td>
-        <td>{{menu.unitCost | number:1.0-0}}</td>
-        <td>{{menu.unit * menu.unitCost | number:1.0-0}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="note">
-    <h3 class="note__title">備考</h3>
-    <div class="note__text">
-      <p *ngFor="let note of data.note?.split('\n')">{{note}}</p>
+    <div class="note editable" (click)="setTarget('note')">
+      <h3 class="note__title">備考</h3>
+      <div class="note__text">
+        <p *ngFor="let note of data?.note?.split('\n')">{{ note }}</p>
+      </div>
     </div>
   </div>
-</div>
+</mat-card>
