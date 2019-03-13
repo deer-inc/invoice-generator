@@ -4,12 +4,15 @@ import { FormComponent } from './form/form.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, InvoiceComponent, FormComponent],
   imports: [
     SharedModule,
     RouterModule.forRoot([]),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
