@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="form">
+<form [formGroup]="form" class="form" autocomplete = "off">
   <ng-container [ngSwitch]="target$ | async">
     <div *ngSwitchCase="'date'">
       <mat-form-field>
@@ -6,7 +6,7 @@
         <input
           matInput
           type="text"
-          autocomplete="nope"
+          autocomplete="off"
           formControlName="id"
           required
         />
@@ -16,7 +16,7 @@
         <input
           matInput
           formControlName="date"
-          autocomplete="nope"
+          autocomplete="off"
           [matDatepicker]="myDatepicker"
         />
         <mat-datepicker-toggle
@@ -33,7 +33,7 @@
           <input
             matInput
             type="text"
-            autocomplete="nope"
+            autocomplete="off"
             formControlName="name"
             required
           />
@@ -44,7 +44,7 @@
             matInput
             type="text"
             placeholder="222-2222"
-            autocomplete="nope"
+            autocomplete="off"
             formControlName="zipCode"
           />
           <span matPrefix>〒&nbsp;</span>
@@ -55,7 +55,7 @@
             matInput
             type="text"
             placeholder="東京都新宿区新宿1-1-1"
-            autocomplete="nope"
+            autocomplete="off"
             formControlName="streetName"
           />
         </mat-form-field>
@@ -67,7 +67,7 @@
         <input
           matInput
           type="text"
-          autocomplete="nope"
+          autocomplete="off"
           formControlName="limit"
           [matDatepicker]="limitDp"
         />
@@ -86,7 +86,7 @@
             name="bank"
             type="text"
             placeholder="デモ銀行"
-            autocomplete="nope"
+            autocomplete="off"
             formControlName="bank"
           />
           <span matSuffix>銀行</span>
@@ -98,7 +98,7 @@
             name="branch"
             type="text"
             placeholder="デモ"
-            autocomplete="nope"
+            autocomplete="off"
             formControlName="branch"
           />
           <span matSuffix>支店</span>
@@ -120,7 +120,7 @@
             type="text"
             name="bank-number"
             placeholder="1111111"
-            autocomplete="nope"
+            autocomplete="off"
             formControlName="number"
           />
         </mat-form-field>
@@ -144,12 +144,13 @@
               <input
                 type="text"
                 matInput
-                placeholder="ディレクション"
+                placeholder="XXX案件ディレクション"
                 formControlName="title"
                 name="menu-title"
-                autocomplete="nope"
+                autocomplete="off"
                 required
               />
+              <mat-hint>案件名が分かるようにしてください</mat-hint>
             </mat-form-field>
             <mat-form-field class="short">
               <mat-label>数量</mat-label>
@@ -158,7 +159,7 @@
                 matInput
                 formControlName="count"
                 name="menu-count"
-                autocomplete="nope"
+                autocomplete="off"
                 required
               />
             </mat-form-field>
@@ -170,7 +171,7 @@
                 formControlName="unit"
                 placeholder="人日"
                 name="menu-unit"
-                autocomplete="nope"
+                autocomplete="off"
                 required
               />
             </mat-form-field>
@@ -182,7 +183,7 @@
                 formControlName="unitCost"
                 name="menu-unit-cost"
                 step="100"
-                autocomplete="nope"
+                autocomplete="off"
                 required
               />
             </mat-form-field>
