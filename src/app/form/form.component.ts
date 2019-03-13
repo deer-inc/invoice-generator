@@ -17,6 +17,7 @@ import {
 } from '@angular/material-moment-adapter';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-form',
@@ -42,7 +43,11 @@ export class FormComponent implements OnInit {
     return this.form.get('menues') as FormArray;
   }
 
-  constructor(private fb: FormBuilder, private invoiceService: InvoiceService) {
+  constructor(
+    private fb: FormBuilder,
+    private invoiceService: InvoiceService,
+    private sanitizer: DomSanitizer
+  ) {
     this.form = fb.group({
       id: Date.now(),
       date: new Date(),
@@ -75,8 +80,14 @@ export class FormComponent implements OnInit {
       note: ''
     });
 
+    if (localStorage.getItem('lastData')) {
+      this.form.patchValue(JSON.parse(localStorage.getItem('lastData')));
+    }
+
     this.form.valueChanges.subscribe((value: Invoice) => {
       this.dataChanged.emit(value);
+      localStorage.setItem('lastData', JSON.stringify(value));
+      this.invoiceService.updateValidStatus(this.form.valid);
     });
   }
 
@@ -104,5 +115,30 @@ export class FormComponent implements OnInit {
 
   removeMenu(i: number) {
     this.menues.removeAt(i);
+  }
+
+  onChangeImage(file, target: string) {
+    const url = window.URL.createObjectURL(file);
+    let safeUrl;
+
+    if (target === 'logo') {
+      safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    } else {
+      safeUrl = this.sanitizer.bypassSecurityTrustStyle('url(' + url + ')');
+    }
+
+    this.form.patchValue({
+      company: {
+        [target]: safeUrl
+      }
+    });
+  }
+
+  removeImage(target: string) {
+    this.form.patchValue({
+      company: {
+        [target]: null
+      }
+    });
   }
 }

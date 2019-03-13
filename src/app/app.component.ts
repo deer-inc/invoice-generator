@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Invoice } from './invoice.service';
+import { Invoice, InvoiceService } from './invoice.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,12 @@ import { Invoice } from './invoice.service';
 })
 export class AppComponent {
   data: Invoice;
+
+  valid$: Observable<boolean> = this.invoiceService.valid$;
+
+  constructor(private invoiceService: InvoiceService) { }
+
+  clearCache() {
+    localStorage.clear();
+  }
 }

@@ -4,6 +4,7 @@
 
 .header {
   display: flex;
+  margin-bottom: 22px;
   &__left {
     width: 60%;
   }
@@ -63,7 +64,6 @@ table {
 }
 
 .transfer-table {
-  margin-bottom: 22px;
   th, td {
     text-align: left;
   }
@@ -86,6 +86,7 @@ table {
   margin-bottom: 25px;
   font-size: 13px;
   min-height: 150px;
+  background: center/80px 80px no-repeat;
   &__name {
     font-weight: bold;
 
@@ -97,7 +98,7 @@ table {
 }
 
 .invalidGroup {
-  background: rgba(red, .32);
+  background-color: rgba(red, .32);
 }
 
 .editable {
@@ -120,4 +121,8 @@ table {
     margin-left: 7em;
     text-align: right;
   }
+}
+
+.company-logo {
+  height: 60px;
 }

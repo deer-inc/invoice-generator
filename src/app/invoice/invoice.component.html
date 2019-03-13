@@ -55,7 +55,7 @@
       </dl>
       <p
         class="company-detail editable" (click)="setTarget('company')"
-        [style.background-image]="data?.company?.seal && 'url(' + data?.company?.seal + ')'"
+        [style.background-image]="data?.company?.seal"
         [class.invalidGroup]="!data?.company?.name || !data?.company?.zipCode || !data?.company?.streetName || !data?.company?.tel"
       >
         <span>{{ data?.company?.name }}</span>
@@ -65,7 +65,7 @@
       <img
         class="company-logo"
         *ngIf="data?.company?.logo"
-        [src="data?.company?.logo"
+        [src]="data?.company?.logo"
         alt="ロゴ"
       />
     </div>

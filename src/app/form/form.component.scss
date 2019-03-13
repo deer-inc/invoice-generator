@@ -28,3 +28,10 @@ mat-form-field {
     padding-left: 8px;
   }
 }
+
+.button-group {
+  margin-bottom: 8px;
+  button + button {
+    margin-left: 16px;
+  }
+}

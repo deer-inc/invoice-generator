@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <span>Invoice</span>
   <span class="spacer"></span>
-  <button mat-raised-button color="accent" (click)="downloadPDF()">
+  <button mat-raised-button color="accent" (click)="downloadPDF()" [disabled]="!(valid$ | async)">
     <mat-icon>picture_as_pdf</mat-icon>
     ダウンロード
   </button>
@@ -9,6 +9,15 @@
     <img src="./assets/github.svg" alt="" class="github">
     GitHub
   </a>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="clearCache()">
+      <mat-icon class="mat-18">delete_sweep</mat-icon>
+      <span>キャッシュをクリア</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
 
 <div class="layout">

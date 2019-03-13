@@ -227,24 +227,16 @@
             required
           />
         </mat-form-field>
-        <mat-form-field>
-          <mat-label>ロゴ</mat-label>
-          <input
-            matInput
-            type="text"
-            autocomplete="nope"
-            formControlName="logo"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>印鑑</mat-label>
-          <input
-            matInput
-            type="text"
-            autocomplete="nope"
-            formControlName="seal"
-          />
-        </mat-form-field>
+        <div class="button-group">
+            <input type="file" (change)="onChangeImage(logoInput.files[0], 'logo')" accept=".png, .jpg" #logoInput hidden>
+          <button type="button" mat-button (click)="logoInput.click()">ロゴを登録</button>
+          <button type="button" mat-button [disabled]="!logoInput.value" (click)="removeImage('logo'); logoInput.value = null">ロゴを削除</button>
+        </div>
+        <div class="button-group">
+            <input type="file"(change)="onChangeImage(sealInput.files[0], 'seal')" #sealInput hidden accept=".png, .jpg">
+            <button type="button" mat-button (click)="sealInput.click()">印鑑を登録</button>
+            <button type="button" mat-button [disabled]="!sealInput.value" (click)="removeImage('seal'); sealInput.value = null">印鑑を削除</button>
+        </div>
       </div>
     </div>
     <div *ngSwitchCase="'note'">
