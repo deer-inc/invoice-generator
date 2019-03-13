@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "gh-build": "ng build --prod --base-href \"/invoice/\""
+    "gh-build": "ng build --prod --base-href \"/invoice-generator/\""
   },
   "private": true,
   "dependencies": {
