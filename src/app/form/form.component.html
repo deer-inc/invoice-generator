@@ -61,11 +61,28 @@
       </div>
     </div>
     <div *ngSwitchCase="'transfer'">
+      <mat-form-field>
+        <mat-label>振込期日</mat-label>
+        <input
+          matInput
+          type="text"
+          autocomplete="nope"
+          formControlName="limit"
+          [matDatepicker]="limitDp"
+        />
+        <mat-hint>翌月末が一般的です</mat-hint>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="limitdp"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #limitdp></mat-datepicker>
+      </mat-form-field>
       <div formGroupName="transferAccount">
         <mat-form-field>
           <mat-label>銀行</mat-label>
           <input
             matInput
+            name="bank"
             type="text"
             placeholder="デモ銀行"
             autocomplete="nope"
@@ -78,7 +95,7 @@
             matInput
             type="text"
             placeholder="株式会社デモ"
-            autocomplete="nope"
+            autocomplete="organization"
             formControlName="bank"
           />
         </mat-form-field>
@@ -87,6 +104,7 @@
           <input
             matInput
             type="text"
+            name="bank-number"
             placeholder="1111111"
             autocomplete="nope"
             formControlName="number"
@@ -94,16 +112,86 @@
         </mat-form-field>
       </div>
     </div>
+    <div *ngSwitchCase="'menu'">
+      <div class="menu-add">
+        <button mat-icon-button (click)="addMenu()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div formArrayName="menues">
+        <div
+          class="menu-group"
+          [formGroupName]="i"
+          *ngFor="let menu of menues.controls; let i = index"
+        >
+          <div class="menu-group__body">
+            <mat-form-field>
+              <mat-label>項目名</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="ディレクション"
+                formControlName="title"
+                name="menu-title"
+                autocomplete="nope"
+                required
+              />
+            </mat-form-field>
+            <mat-form-field class="short">
+              <mat-label>数量</mat-label>
+              <input
+                type="number"
+                matInput
+                formControlName="count"
+                name="menu-count"
+                autocomplete="nope"
+                required
+              />
+            </mat-form-field>
+            <mat-form-field class="short">
+              <mat-label>単位</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="unit"
+                placeholder="人日"
+                name="menu-unit"
+                autocomplete="nope"
+                required
+              />
+            </mat-form-field>
+            <mat-form-field class="short">
+              <mat-label>単価</mat-label>
+              <input
+                type="number"
+                matInput
+                formControlName="unitCost"
+                name="menu-unit-cost"
+                step="100"
+                autocomplete="nope"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="menu-group__action" *ngIf="menues.length > 1">
+            <button mat-icon-button (click)="removeMenu(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div *ngSwitchCase="'company'">
       <div formGroupName="company">
         <mat-form-field>
-          <mat-label>会社名</mat-label>
+          <mat-label>会社名/事業名</mat-label>
           <input
             matInput
             type="text"
             placeholder="株式会社デモ"
             autocomplete="organization"
             formControlName="name"
+            required
           />
         </mat-form-field>
         <mat-form-field>
@@ -114,6 +202,7 @@
             placeholder="222-2222"
             autocomplete="postal-code"
             formControlName="zipCode"
+            required
           />
         </mat-form-field>
         <mat-form-field>
@@ -124,6 +213,18 @@
             placeholder="東京都新宿区新宿1-1-1"
             autocomplete="street-address"
             formControlName="streetName1"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>電話番号</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="新宿ダミービル3F"
+            autocomplete="tel"
+            formControlName="tel"
+            required
           />
         </mat-form-field>
         <mat-form-field>
@@ -144,21 +245,13 @@
             formControlName="seal"
           />
         </mat-form-field>
-        <mat-form-field>
-          <mat-label>電話番号</mat-label>
-          <input
-            matInput
-            type="text"
-            placeholder="新宿ダミービル3F"
-            autocomplete="tel"
-            formControlName="tel"
-          />
-        </mat-form-field>
       </div>
     </div>
     <div *ngSwitchCase="'note'">
       <mat-form-field>
+        <mat-label>備考</mat-label>
         <textarea matInput formControlName="note" rows="10"></textarea>
+        <mat-hint>具体的な案件名を含めましょう</mat-hint>
       </mat-form-field>
     </div>
     <p *ngSwitchDefault>

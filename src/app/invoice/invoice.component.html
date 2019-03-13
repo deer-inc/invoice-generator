@@ -33,15 +33,15 @@
         <tbody>
           <tr>
             <th>振込期日</th>
-            <th>{{ data?.limitDate | date: 'yyyy年MM月dd日' }}</th>
+            <td>{{ data?.limit | date: 'yyyy年MM月dd日' }}</td>
           </tr>
           <tr>
             <th>振込先</th>
-            <th>
+            <td>
               <span>{{ data?.transferAccount?.bank }}</span>
               <span>{{ data?.transferAccount?.name }}</span>
               <span>{{ data?.transferAccount?.number }}</span>
-            </th>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -71,7 +71,7 @@
     </div>
   </div>
   <div class="body">
-    <table class="menues editable" (click)="setTarget('menu')" [class.invalidGroup]="!data?.menues?.length">
+    <table class="menues editable" (click)="setTarget('menu')" [class.invalidGroup]="!data?.menues?.length || !data?.menues[0].title">
       <thead>
         <tr>
           <th>詳細</th>
@@ -88,10 +88,10 @@
           <td>&nbsp;</td>
         </tr>
         <tr *ngFor="let menu of data?.menues">
-          <td>{{ menu.title }}</td>
-          <td>{{ (menu.count | number:'1.0-2') + menu.unit }}</td>
-          <td>{{ menu.unitCost | number: '1.0-0' }}</td>
-          <td>{{ menu.unit * menu.unitCost | number:'1.0-0' }}</td>
+          <td>{{ menu.title || '&nbsp;' }}</td>
+          <td>{{ (menu.count | number:'1.0-2')}}{{menu.unit}}</td>
+          <td><span *ngIf="menu.unitCost">{{ menu.unitCost | number:'1.0-0' }}</span></td>
+          <td><span *ngIf="menu.count && menu.unitCost">{{ menu.count * menu.unitCost | number:'1.0-0' }}</span></td>
         </tr>
       </tbody>
     </table>

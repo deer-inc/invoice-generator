@@ -1,7 +1,21 @@
 .layout {
   width: 1400px;
-  margin: 0 auto;
+  margin: 24px auto;
   display: grid;
   grid-gap: 24px;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 350px 1fr;
+  @media print {
+    display: block;
+    width: 100%;
+  }
+}
+
+.spacer {
+  flex: 1 1 0;
+}
+
+.github {
+  height: 26px;
+  display: inline-block;
+  margin: 0 4px 3px 0;
 }

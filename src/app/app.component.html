@@ -1,5 +1,18 @@
+<mat-toolbar color="primary">
+  <span>Invoice</span>
+  <span class="spacer"></span>
+  <button mat-raised-button color="accent" (click)="downloadPDF()">
+    <mat-icon>picture_as_pdf</mat-icon>
+    ダウンロード
+  </button>
+  <a href="https://github.com/deer-inc/invoice-generator" target="_blank" mat-button>
+    <img src="./assets/github.svg" alt="" class="github">
+    GitHub
+  </a>
+</mat-toolbar>
+
 <div class="layout">
-  <div class="layout__form">
+  <div class="layout__form noprint">
     <app-form (dataChanged)="data = $event"></app-form>
   </div>
   <div class="layout__main">

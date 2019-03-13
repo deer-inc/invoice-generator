@@ -35,6 +35,7 @@ export interface Invoice {
   id: string;
   date: number;
   client: Client;
+  limit: number;
   transferAccount: TransferAccount;
   company: Company;
   menues: Menu[];

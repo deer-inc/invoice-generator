@@ -1,7 +1,30 @@
-.form {
-  padding: 16px;
-  mat-form-field {
-    font-size: 13px;
-    width: 100%;
+mat-form-field {
+  font-size: 13px;
+  width: 100%;
+}
+
+.short {
+  width: 80px;
+  & + & {
+    margin-left: 8px;
+  }
+}
+
+.menu-add {
+  margin-bottom: 8px;
+  text-align: right;
+}
+
+.menu-group {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  & + & {
+    margin-top: 8px;
+  }
+  &__action {
+    padding-left: 8px;
   }
 }
