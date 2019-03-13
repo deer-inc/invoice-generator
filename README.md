@@ -5,7 +5,20 @@
 
 # Invoice
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
+請求書ジェネレーターです。URLパラメーターをつけると入力状態で開くことができます。
+
+```
+https://deer-inc.github.io/invoice-generator/?title=品目&count=数量&unitType=人日&unitCost=単価
+```
+
+- 情報はローカルストレージに保存されます。画面右上よりキャッシュクリアが可能です
+- DB通信は一切発生しません。ローカルで完結しています。
+
+## コントリビュート
+
+バグ報告や機能追加要望はIssueやPRを気軽にください。😄
+
+---
 
 ## Development server
 
