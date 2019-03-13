@@ -90,7 +90,9 @@ export class FormComponent implements OnInit {
     this.form.valueChanges.subscribe((value: Invoice) => {
       this.dataChanged.emit(value);
       const data = Object.assign({}, value);
-      data.limit = null;
+      delete data.limit;
+      delete data.menues;
+      delete data.client;
       localStorage.setItem('lastData', JSON.stringify(data));
       this.invoiceService.updateValidStatus(this.form.valid);
     });
