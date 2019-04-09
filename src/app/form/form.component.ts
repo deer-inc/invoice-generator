@@ -115,7 +115,9 @@ export class FormComponent implements OnInit {
       }
       if (params.for) {
         this.form.patchValue({
-          ['client.name']: params.for
+          client: {
+            name: params.for
+          }
         });
       }
     });
