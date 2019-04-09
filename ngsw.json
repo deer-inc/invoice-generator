@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1552544919300,
+  "timestamp": 1554774018688,
   "index": "/invoice-generator/index.html",
   "assetGroups": [
     {
@@ -11,7 +11,7 @@
         "/invoice-generator/es2015-polyfills.c5dd28b362270c767b34.js",
         "/invoice-generator/favicon.ico",
         "/invoice-generator/index.html",
-        "/invoice-generator/main.7a6d6cba88946b103cb5.js",
+        "/invoice-generator/main.0ac3e77a12775ddf8433.js",
         "/invoice-generator/polyfills.8bbb231b43165d65d357.js",
         "/invoice-generator/runtime.26209474bfa8dc87a77c.js",
         "/invoice-generator/styles.1d5c0910a5fd83289843.css"
@@ -43,8 +43,8 @@
     "/invoice-generator/assets/icons/icon-72x72.png": "97435c9cc3a98c5de4907a826049fdcc8ec4db1a",
     "/invoice-generator/es2015-polyfills.c5dd28b362270c767b34.js": "b7a81c61d32b0b12737f0c13f45973ba391cd7f9",
     "/invoice-generator/favicon.ico": "90712c6000c07e7cef10ac2e77ef6b105b17b877",
-    "/invoice-generator/index.html": "8173b6464279518c4d251aad8d58d9a447b53cf4",
-    "/invoice-generator/main.7a6d6cba88946b103cb5.js": "6109133ea46c8910ba69a734f530de696a563e19",
+    "/invoice-generator/index.html": "899071fe2f3ce0915f945e6c1b5fad208cc86784",
+    "/invoice-generator/main.0ac3e77a12775ddf8433.js": "98bc8e7728ec35f18be06acbd89c7dd977b489e5",
     "/invoice-generator/polyfills.8bbb231b43165d65d357.js": "ffa449995bf2eba2ccd0a002417214f7eb75e7b5",
     "/invoice-generator/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
     "/invoice-generator/styles.1d5c0910a5fd83289843.css": "e4c23356e0de317de71110547deb349ef79d330a"
