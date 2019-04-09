@@ -106,11 +106,16 @@ export class FormComponent implements OnInit {
     }
 
     this.route.queryParams.subscribe(params => {
-      if (params.title && params.unit && params.unitCost && params.count) {
+      if (params.title || params.unit || params.unitCost || params.count) {
         this.form.patchValue({
           menues: [
             params
           ]
+        });
+      }
+      if (params.for) {
+        this.form.patchValue({
+          ['client.name']: params.for
         });
       }
     });
