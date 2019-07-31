@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1559726574280,
+  "timestamp": 1564572086557,
   "index": "/invoice-generator/index.html",
   "assetGroups": [
     {
@@ -8,10 +8,10 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/invoice-generator/es2015-polyfills.c5dd28b362270c767b34.js",
+        "/invoice-generator/es2015-polyfills.1e04665e16f944715fd2.js",
         "/invoice-generator/favicon.ico",
         "/invoice-generator/index.html",
-        "/invoice-generator/main.e3dda9964c5264376856.js",
+        "/invoice-generator/main.3ad46c0d2fdb0d90205f.js",
         "/invoice-generator/polyfills.8bbb231b43165d65d357.js",
         "/invoice-generator/runtime.26209474bfa8dc87a77c.js",
         "/invoice-generator/styles.1d5c0910a5fd83289843.css"
@@ -41,10 +41,10 @@
     "/invoice-generator/assets/icons/icon-192x192.png": "c9d45dfaa1eed8b5bacbafc157eec5e7264dbdb1",
     "/invoice-generator/assets/icons/icon-512x512.png": "0e4dc42cc9b79b8256d8d3d8ea7c4a3fb8b86d52",
     "/invoice-generator/assets/icons/icon-72x72.png": "97435c9cc3a98c5de4907a826049fdcc8ec4db1a",
-    "/invoice-generator/es2015-polyfills.c5dd28b362270c767b34.js": "b7a81c61d32b0b12737f0c13f45973ba391cd7f9",
+    "/invoice-generator/es2015-polyfills.1e04665e16f944715fd2.js": "b7a81c61d32b0b12737f0c13f45973ba391cd7f9",
     "/invoice-generator/favicon.ico": "90712c6000c07e7cef10ac2e77ef6b105b17b877",
-    "/invoice-generator/index.html": "63d3fca66cb532392afe6a99e39144211a9517d9",
-    "/invoice-generator/main.e3dda9964c5264376856.js": "c9bc8754bae48ef1f94c62c222f265c643ac58b2",
+    "/invoice-generator/index.html": "9aa8cdd55f7e35a6591a0d427e2405efb7b55150",
+    "/invoice-generator/main.3ad46c0d2fdb0d90205f.js": "a5214b3823fda645c010d6a587959d6b4864699f",
     "/invoice-generator/polyfills.8bbb231b43165d65d357.js": "ffa449995bf2eba2ccd0a002417214f7eb75e7b5",
     "/invoice-generator/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
     "/invoice-generator/styles.1d5c0910a5fd83289843.css": "e4c23356e0de317de71110547deb349ef79d330a"
