@@ -114,7 +114,7 @@ export class FormComponent implements OnInit {
     }
 
     if (Object.keys(query).length > 0) {
-      this.router.navigate([],
+      this.router.navigate(['./'],
         {
           relativeTo: this.route,
           queryParams: query,
