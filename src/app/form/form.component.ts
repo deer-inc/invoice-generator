@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { take, filter, skip } from 'rxjs/operators';
 import { Invoice, InvoiceService } from '../invoice.service';
 import {
   FormBuilder,
@@ -18,7 +19,7 @@ import {
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -48,7 +49,8 @@ export class FormComponent implements OnInit {
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.form = fb.group({
       id: Date.now(),
@@ -95,7 +97,31 @@ export class FormComponent implements OnInit {
       delete data.client;
       localStorage.setItem('lastData', JSON.stringify(data));
       this.invoiceService.updateValidStatus(this.form.valid);
+      this.setQueryParams();
     });
+  }
+
+  setQueryParams() {
+    const value = this.form.value;
+    const query: any = {};
+
+    if (value.client && value.client.name) {
+      query.for = value.client.name;
+    }
+
+    if (value.menues && value.menues[0] && value.menues[0].title) {
+      Object.assign(query, value.menues[0]);
+    }
+
+    if (Object.keys(query).length > 0) {
+      this.router.navigate([],
+        {
+          relativeTo: this.route,
+          queryParams: query,
+          queryParamsHandling: 'merge'
+        }
+      );
+    }
   }
 
   ngOnInit() {
@@ -105,21 +131,20 @@ export class FormComponent implements OnInit {
       this.addMenu();
     }
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.pipe(
+      skip(1),
+      take(1),
+    ).subscribe(params => {
+      const value: any = {};
       if (params.title || params.unit || params.unitCost || params.count) {
-        this.form.patchValue({
-          menues: [
-            params
-          ]
-        });
+        value.menues = [params];
       }
       if (params.for) {
-        this.form.patchValue({
-          client: {
-            name: params.for
-          }
-        });
+        value.client = {
+          name: params.for
+        };
       }
+      this.form.patchValue(value);
     });
   }
 
