@@ -86,7 +86,12 @@ export class FormComponent implements OnInit {
     });
 
     if (localStorage.getItem('lastData')) {
-      this.form.patchValue(JSON.parse(localStorage.getItem('lastData')));
+      this.form.patchValue(
+        {
+          ...JSON.parse(localStorage.getItem('lastData')),
+          id: Date.now()
+        }
+      );
     }
 
     this.form.valueChanges.subscribe((value: Invoice) => {
