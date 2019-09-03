@@ -145,6 +145,10 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     this.dataChanged.emit(this.form.value);
 
+    if (!this.menues.length) {
+      this.addMenu();
+    }
+
     this.route.queryParams.pipe(
       skip(1),
       take(1),
