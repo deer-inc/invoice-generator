@@ -45,6 +45,10 @@ export class FormComponent implements OnInit {
     return this.form.get('menues') as FormArray;
   }
 
+  get defaultTaxRate(): number {
+    return ((new Date('October 1 2019')) < new Date()) ? 10 : 8;
+  }
+
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
@@ -159,9 +163,9 @@ export class FormComponent implements OnInit {
         value.menues.push({
           title: p('title', i),
           unit: p('unit', i),
-          unitCost: parseInt(p('unitCost', i), 10),
-          count: parseInt(p('count', i), 10),
-          taxRate: parseInt(p('taxRate', i), 10)
+          unitCost: parseInt(p('unitCost', i), 10) || '',
+          count: parseInt(p('count', i), 10) || '',
+          taxRate: parseInt(p('taxRate', i), 10) || this.defaultTaxRate
         });
       }
       while (this.menues.length < value.menues.length) {
@@ -184,7 +188,7 @@ export class FormComponent implements OnInit {
           count: '',
           unit: '人日',
           unitCost: 0,
-          taxRate: ((new Date('October 1 2019')) < new Date()) ? 10 : 8
+          taxRate: this.defaultTaxRate
         },
         Validators.required
       )
