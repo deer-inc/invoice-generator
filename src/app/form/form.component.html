@@ -178,7 +178,6 @@
                 placeholder="人日"
                 name="menu-unit"
                 autocomplete="off"
-                required
               />
             </mat-form-field>
             <mat-form-field class="short">
@@ -192,6 +191,19 @@
                 autocomplete="off"
                 required
               />
+            </mat-form-field>
+            <mat-form-field class="short">
+              <mat-label>税区分</mat-label>
+              <select
+                matNativeControl
+                formControlName="taxRate"
+                name="menu-tax-rate"
+                required
+              >
+                <option value="8">8%</option>
+                <option value="10">10%</option>
+                <option value="0">対象外</option>
+              </select>
             </mat-form-field>
           </div>
           <div class="menu-group__action" *ngIf="menues.length > 1">

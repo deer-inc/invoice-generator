@@ -109,8 +109,26 @@ export class FormComponent implements OnInit {
       query.for = value.client.name;
     }
 
-    if (value.menues && value.menues[0] && value.menues[0].title) {
-      Object.assign(query, value.menues[0]);
+    if (value.menues) {
+      let i = 0;
+      value.menues.forEach(menu => {
+        if (menu && menu.title) {
+          Object.keys(menu).forEach(key => {
+            query[key + (i || '')] = menu[key];
+          });
+          i++;
+        }
+      });
+      this.route.queryParams.subscribe(params => {
+        const p = (key, index) => params[key + (index || '')];
+        for (; p('title', i) || p('unit', i) || p('unitCost', i) || p('count', i) || p('taxRate', i); i++) {
+          query['title' + (i || '')] = null;
+          query['unit' + (i || '')] = null;
+          query['unitCost' + (i || '')] = null;
+          query['count' + (i || '')] = null;
+          query['taxRate' + (i || '')] = null;
+        }
+      });
     }
 
     if (Object.keys(query).length > 0) {
@@ -127,17 +145,23 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     this.dataChanged.emit(this.form.value);
 
-    if (!this.menues.length) {
-      this.addMenu();
-    }
-
     this.route.queryParams.pipe(
       skip(1),
       take(1),
     ).subscribe(params => {
-      const value: any = {};
-      if (params.title || params.unit || params.unitCost || params.count) {
-        value.menues = [params];
+      const value: any = { menues: [] };
+      const p = (key, index) => params[key + (index || '')];
+      for (let i = 0; p('title', i) || p('unit', i) || p('unitCost', i) || p('count', i) || p('taxRate', i); i++) {
+        value.menues.push({
+          title: p('title', i),
+          unit: p('unit', i),
+          unitCost: parseInt(p('unitCost', i), 10),
+          count: parseInt(p('count', i), 10),
+          taxRate: parseInt(p('taxRate', i), 10)
+        });
+      }
+      while (this.menues.length < value.menues.length) {
+        this.addMenu();
       }
       if (params.for) {
         value.client = {
@@ -155,7 +179,8 @@ export class FormComponent implements OnInit {
           title: '',
           count: '',
           unit: '人日',
-          unitCost: 0
+          unitCost: 0,
+          taxRate: ((new Date('October 1 2019')) < new Date()) ? 10 : 8
         },
         Validators.required
       )
