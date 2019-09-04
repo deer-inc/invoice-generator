@@ -16,7 +16,4 @@ export class AppComponent {
   clearCache() {
     localStorage.clear();
   }
-
-  downloadPDF(element) {
-  }
 }
