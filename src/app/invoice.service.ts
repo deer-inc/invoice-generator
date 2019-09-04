@@ -49,16 +49,9 @@ export class InvoiceService {
   editTargetSource: Subject<string> = new BehaviorSubject<string>(null);
   editTarget$ = this.editTargetSource.asObservable();
 
-  validSource: Subject<boolean> = new BehaviorSubject<boolean>(null);
-  valid$ = this.validSource.asObservable();
-
   constructor() { }
 
   setTarget(target: string): void {
     this.editTargetSource.next(target);
-  }
-
-  updateValidStatus(valid: boolean): void {
-    this.validSource.next(valid);
   }
 }

@@ -9,8 +9,6 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   data: Invoice;
 
-  valid$: Observable<boolean> = this.invoiceService.valid$;
-
   constructor(private invoiceService: InvoiceService) { }
 
   clearCache() {
