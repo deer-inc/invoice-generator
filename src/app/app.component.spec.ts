@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { FormComponent } from './form/form.component';
@@ -6,6 +6,9 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { RouterModule } from '@angular/router';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -20,17 +23,20 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it('ローカルストレージがクリアされること', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
     localStorage.setItem('test', 'demo');
-    app.clearCache();
+    component.clearCache();
     expect(!localStorage.getItem('test')).toBeTruthy();
   });
 });

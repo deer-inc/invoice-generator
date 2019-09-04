@@ -28,4 +28,14 @@ describe('FormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('フォームアイテムが削除されること', () => {
+    component.removeMenu(0);
+    expect(component.menues.length === 0).toBeTruthy();
+  });
+
+  it('画像が削除されること', () => {
+    component.removeImage('logo');
+    expect(!component.form.value.company.logo).toBeTruthy();
+  });
 });
