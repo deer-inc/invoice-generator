@@ -23,7 +23,7 @@ script:
   - npm run test -- --no-watch --no-progress --code-coverage --browsers=ChromeHeadlessCI
   - npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
   - npm run lint
-  - npm run gh-build
+  - npm run deploy
 
 after_success:
   - cat ./coverage/invoice/lcov.info | ./node_modules/coveralls/bin/coveralls.js
