@@ -7,11 +7,7 @@ import {
   Validators,
   FormArray
 } from '@angular/forms';
-import {
-  MAT_DATE_LOCALE,
-  DateAdapter,
-  MAT_DATE_FORMATS
-} from '@angular/material';
+import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_FORMATS
