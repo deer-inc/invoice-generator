@@ -9,4 +9,13 @@ describe('InvoiceService', () => {
     const service: InvoiceService = TestBed.get(InvoiceService);
     expect(service).toBeTruthy();
   });
+
+  it('ターゲットが正しくセットされる', (done) => {
+    const service: InvoiceService = TestBed.get(InvoiceService);
+    service.setTarget('demoTarget');
+    service.editTarget$.subscribe(target => {
+      expect(target).toBe('demoTarget');
+      done();
+    });
+  });
 });
