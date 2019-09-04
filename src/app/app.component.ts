@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Invoice, InvoiceService } from './invoice.service';
-import { Observable } from 'rxjs';
+import { Invoice } from './invoice.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   data: Invoice;
-
-  constructor(private invoiceService: InvoiceService) { }
 
   clearCache() {
     localStorage.clear();

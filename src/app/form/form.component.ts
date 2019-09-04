@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { take, filter, skip } from 'rxjs/operators';
+import { take, skip } from 'rxjs/operators';
 import { Invoice, InvoiceService } from '../invoice.service';
 import {
   FormBuilder,
@@ -101,7 +101,6 @@ export class FormComponent implements OnInit {
       delete data.menues;
       delete data.client;
       localStorage.setItem('lastData', JSON.stringify(data));
-      this.invoiceService.updateValidStatus(this.form.valid);
       this.setQueryParams();
     });
   }
