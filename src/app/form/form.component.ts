@@ -41,12 +41,14 @@ export class FormComponent implements OnInit {
   form: FormGroup;
   target$: Observable<string> = this.invoiceService.editTarget$;
 
+  private urlParamCount = 0;
+
   get menues(): FormArray {
     return this.form.get('menues') as FormArray;
   }
 
   get defaultTaxRate(): number {
-    return ((new Date('October 1 2019')) < new Date()) ? 10 : 8;
+    return new Date('October 1 2019').getTime() < Date.now() ? 10 : 8;
   }
 
   constructor(
@@ -118,21 +120,20 @@ export class FormComponent implements OnInit {
       value.menues.forEach(menu => {
         if (menu && menu.title) {
           Object.keys(menu).forEach(key => {
-            query[key + (i || '')] = menu[key];
+            query[key + String(i + 1)] = menu[key];
           });
           i++;
         }
       });
-      this.route.queryParams.subscribe(params => {
-        const p = (key, index) => params[key + (index || '')];
-        for (; p('title', i) || p('unit', i) || p('unitCost', i) || p('count', i) || p('taxRate', i); i++) {
-          query['title' + (i || '')] = null;
-          query['unit' + (i || '')] = null;
-          query['unitCost' + (i || '')] = null;
-          query['count' + (i || '')] = null;
-          query['taxRate' + (i || '')] = null;
-        }
-      });
+      const urlParamCount = i;
+      for (; i < this.urlParamCount; i++) {
+        query['title' + String(i + 1)] = null;
+        query['unit' + String(i + 1)] = null;
+        query['unitCost' + String(i + 1)] = null;
+        query['count' + String(i + 1)] = null;
+        query['taxRate' + String(i + 1)] = null;
+      }
+      this.urlParamCount = urlParamCount;
     }
 
     if (Object.keys(query).length > 0) {
@@ -158,8 +159,9 @@ export class FormComponent implements OnInit {
       take(1),
     ).subscribe(params => {
       const value: any = { menues: [] };
-      const p = (key, index) => params[key + (index || '')];
-      for (let i = 0; p('title', i) || p('unit', i) || p('unitCost', i) || p('count', i) || p('taxRate', i); i++) {
+      const p = (key, index) => params[key + String(index + 1)];
+      let i = 0;
+      for (; p('title', i) || p('unit', i) || p('unitCost', i) || p('count', i) || p('taxRate', i); i++) {
         value.menues.push({
           title: p('title', i),
           unit: p('unit', i),
@@ -168,6 +170,7 @@ export class FormComponent implements OnInit {
           taxRate: parseInt(p('taxRate', i), 10) || this.defaultTaxRate
         });
       }
+      this.urlParamCount = i;
       while (this.menues.length < value.menues.length) {
         this.addMenu();
       }
