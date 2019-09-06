@@ -33,10 +33,10 @@
           </tr>
         </tbody>
       </table>
-      <table class="tax-table" *ngIf="totalsByTaxRate.length &gt; 1">
+      <table class="tax-table" *ngIf="totalsByTaxRate.length > 1">
         <tbody>
           <tr *ngFor="let i of totalsByTaxRate">
-            <th>{{ i.taxRate &gt; 0 ? i.taxRate + '%対象' : '対象外' }}</th>
+            <th>{{ i.taxRate > 0 ? i.taxRate + '%対象' : '対象外' }}</th>
             <td>{{ i.totalCost | number:'1.0-0' }}円</td>
             <th>消費税</th>
             <td>{{ i.tax | number:'1.0-0' }}円</td>
