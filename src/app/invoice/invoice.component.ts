@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Invoice, InvoiceService } from '../invoice.service';
 
-export interface ITotalWithTax {
+export interface TotalWithTax {
   taxRate: number;
   totalCost: number;
   tax: number;
@@ -29,7 +29,7 @@ export class InvoiceComponent implements OnInit {
       .reduce((pv, cv) => pv + cv, 0);
   }
 
-  get totalsByTaxRate(): ITotalWithTax[] {
+  get totalsByTaxRate(): TotalWithTax[] {
     const totals = {};
     if (this.data) {
       this.data.menues
