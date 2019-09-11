@@ -8,7 +8,7 @@
 請求書ジェネレーターです。URLパラメーターをつけると入力状態で開くことができます。
 
 ```
-https://pinalto.github.io/invoice-generator/?title1=品目&count1=数量&unit1=人日&unitCost1=単価&taxRate1=税率
+https://deer-inc.github.io/invoice-generator/?title1=品目&count1=数量&unit1=人日&unitCost1=単価&taxRate1=税率
 ```
 
 - 情報はローカルストレージに保存されます。画面右上よりキャッシュクリアが可能です
