@@ -19,6 +19,7 @@ export interface Menu {
   count: number;
   unit: string;
   unitCost: number;
+  taxRate: number;
 }
 
 export interface Company {

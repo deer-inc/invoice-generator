@@ -8,7 +8,7 @@
 請求書ジェネレーターです。URLパラメーターをつけると入力状態で開くことができます。
 
 ```
-https://deer-inc.github.io/invoice-generator/?title=品目&count=数量&unitType=人日&unitCost=単価
+https://deer-inc.github.io/invoice-generator/?title1=品目&count1=数量&unit1=人日&unitCost1=単価&taxRate1=税率
 ```
 
 - 情報はローカルストレージに保存されます。画面右上よりキャッシュクリアが可能です

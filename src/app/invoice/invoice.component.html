@@ -26,10 +26,20 @@
         <tbody>
           <tr>
             <td>{{ totalCost | number:'1.0-0' }}円</td>
-            <td>{{ totalCost * 0.08 | number:'1.0-0' }}円</td>
+            <td>{{ totalTax | number:'1.0-0' }}円</td>
             <td class="total-cost">
-              {{ totalCost * 1.08 | number:'1.0-0' }}円
+              {{ totalCost + totalTax | number:'1.0-0' }}円
             </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="tax-table" *ngIf="totalsByTaxRate.length > 1">
+        <tbody>
+          <tr *ngFor="let i of totalsByTaxRate">
+            <th>{{ i.taxRate > 0 ? i.taxRate + '%対象' : '対象外' }}</th>
+            <td>{{ i.totalCost | number:'1.0-0' }}円</td>
+            <th>消費税</th>
+            <td>{{ i.tax | number:'1.0-0' }}円</td>
           </tr>
         </tbody>
       </table>
@@ -105,7 +115,7 @@
         </tr>
         <tr *ngFor="let menu of data?.menues">
           <td>{{ menu.title || '&nbsp;' }}</td>
-          <td><span *ngIf="menu.count && menu.unit">{{ (menu.count | number:'1.0-2')}}{{menu.unit}}</span></td>
+          <td><span *ngIf="menu.count">{{ (menu.count | number:'1.0-2')}}{{menu.unit}}</span></td>
           <td><span *ngIf="menu.unitCost">{{ menu.unitCost | number:'1.0-0' }}</span></td>
           <td><span *ngIf="menu.count && menu.unitCost">{{ menu.count * menu.unitCost | number:'1.0-0' }}</span></td>
         </tr>

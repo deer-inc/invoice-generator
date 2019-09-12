@@ -37,8 +37,14 @@ export class FormComponent implements OnInit {
   form: FormGroup;
   target$: Observable<string> = this.invoiceService.editTarget$;
 
+  private urlParamCount = 0;
+
   get menues(): FormArray {
     return this.form.get('menues') as FormArray;
+  }
+
+  get defaultTaxRate(): number {
+    return new Date('October 1 2019').getTime() < Date.now() ? 10 : 8;
   }
 
   constructor(
@@ -109,8 +115,25 @@ export class FormComponent implements OnInit {
       query.for = value.client.name;
     }
 
-    if (value.menues && value.menues[0] && value.menues[0].title) {
-      Object.assign(query, value.menues[0]);
+    if (value.menues) {
+      let i = 0;
+      value.menues.forEach(menu => {
+        if (menu && menu.title) {
+          Object.keys(menu).forEach(key => {
+            query[key + String(i + 1)] = menu[key];
+          });
+          i++;
+        }
+      });
+      const urlParamCount = i;
+      for (; i < this.urlParamCount; i++) {
+        query['title' + String(i + 1)] = null;
+        query['unit' + String(i + 1)] = null;
+        query['unitCost' + String(i + 1)] = null;
+        query['count' + String(i + 1)] = null;
+        query['taxRate' + String(i + 1)] = null;
+      }
+      this.urlParamCount = urlParamCount;
     }
 
     if (Object.keys(query).length > 0) {
@@ -135,9 +158,21 @@ export class FormComponent implements OnInit {
       skip(1),
       take(1),
     ).subscribe(params => {
-      const value: any = {};
-      if (params.title || params.unit || params.unitCost || params.count) {
-        value.menues = [params];
+      const value: any = { menues: [] };
+      const p = (key, index) => params[key + String(index + 1)];
+      let i = 0;
+      for (; p('title', i) || p('unit', i) || p('unitCost', i) || p('count', i) || p('taxRate', i); i++) {
+        value.menues.push({
+          title: p('title', i),
+          unit: p('unit', i),
+          unitCost: parseInt(p('unitCost', i), 10) || '',
+          count: parseInt(p('count', i), 10) || '',
+          taxRate: parseInt(p('taxRate', i), 10) || this.defaultTaxRate
+        });
+      }
+      this.urlParamCount = i;
+      while (this.menues.length < value.menues.length) {
+        this.addMenu();
       }
       if (params.for) {
         value.client = {
@@ -155,7 +190,8 @@ export class FormComponent implements OnInit {
           title: '',
           count: '',
           unit: '人日',
-          unitCost: 0
+          unitCost: 0,
+          taxRate: this.defaultTaxRate
         },
         Validators.required
       )
