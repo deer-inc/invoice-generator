@@ -3,7 +3,7 @@ sudo: false
 
 language: node_js
 node_js:
-  - "10"
+  - "11"
 
 addons:
   apt:
@@ -15,10 +15,6 @@ addons:
 cache:
   directories:
      - ./node_modules
-
-before_install:
-  - sudo apt autoremove
-  - sudo apt-get update
 
 install:
   - npm install
