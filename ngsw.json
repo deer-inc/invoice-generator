@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1568339772596,
+  "timestamp": 1568340196574,
   "index": "/invoice-generator/index.html",
   "assetGroups": [
     {
@@ -39,11 +39,11 @@
   "hashTable": {
     "/invoice-generator/assets/cover.png": "9c9c1e4017a8cde11cfded9c1d6302f80a8c0aab",
     "/invoice-generator/assets/github.svg": "d72a8270e65f1b4a65f46e5c48d8fb37ee1304f5",
-    "/invoice-generator/assets/icons/icon-144x144.png": "ba0f7b04df76e7fd5f72d7dd444399a3e1b16e6b",
-    "/invoice-generator/assets/icons/icon-192x192.png": "c9d45dfaa1eed8b5bacbafc157eec5e7264dbdb1",
-    "/invoice-generator/assets/icons/icon-512x512.png": "0e4dc42cc9b79b8256d8d3d8ea7c4a3fb8b86d52",
-    "/invoice-generator/assets/icons/icon-72x72.png": "97435c9cc3a98c5de4907a826049fdcc8ec4db1a",
-    "/invoice-generator/favicon.ico": "90712c6000c07e7cef10ac2e77ef6b105b17b877",
+    "/invoice-generator/assets/icons/icon-144x144.png": "89180bacfbd724ec671718bcc2e0f6469a545708",
+    "/invoice-generator/assets/icons/icon-192x192.png": "4d66985358da045114c99e5da0fd0bf4296709cb",
+    "/invoice-generator/assets/icons/icon-512x512.png": "31157abb5aff8e0bf58bbbd131a3b030655acdd5",
+    "/invoice-generator/assets/icons/icon-72x72.png": "7563441d686742b602c4226d924a5e7d11c81666",
+    "/invoice-generator/favicon.ico": "97a3ba7ddb5a48e48212737cf75371a32b25467e",
     "/invoice-generator/index.html": "6f7bbd2d7a1fa8548c670bf1d149ffd72fad4e3f",
     "/invoice-generator/main-es2015.2bb4c9d3fb1d7ab382a2.js": "af0fc45154f305d41c84c8ebb0378ba1b3315b0f",
     "/invoice-generator/main-es5.2bb4c9d3fb1d7ab382a2.js": "46b5d8281cd630642f2a26d812dbbf304e82bd16",
