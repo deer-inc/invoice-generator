@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1568340196574,
+  "timestamp": 1568342612157,
   "index": "/invoice-generator/index.html",
   "assetGroups": [
     {
@@ -37,7 +37,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/invoice-generator/assets/cover.png": "9c9c1e4017a8cde11cfded9c1d6302f80a8c0aab",
+    "/invoice-generator/assets/cover.png": "852118eff8ab9706cd77a2af337d24c11b9add1b",
     "/invoice-generator/assets/github.svg": "d72a8270e65f1b4a65f46e5c48d8fb37ee1304f5",
     "/invoice-generator/assets/icons/icon-144x144.png": "89180bacfbd724ec671718bcc2e0f6469a545708",
     "/invoice-generator/assets/icons/icon-192x192.png": "4d66985358da045114c99e5da0fd0bf4296709cb",
