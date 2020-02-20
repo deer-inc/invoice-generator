@@ -1,13 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { take, skip } from 'rxjs/operators';
 import { Invoice, InvoiceService } from '../invoice.service';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormArray
-} from '@angular/forms';
-import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+  MAT_DATE_LOCALE,
+  DateAdapter,
+  MAT_DATE_FORMATS
+} from '@angular/material/core';
 import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_FORMATS
@@ -88,12 +87,10 @@ export class FormComponent implements OnInit {
     });
 
     if (localStorage.getItem('lastData')) {
-      this.form.patchValue(
-        {
-          ...JSON.parse(localStorage.getItem('lastData')),
-          id: Date.now()
-        }
-      );
+      this.form.patchValue({
+        ...JSON.parse(localStorage.getItem('lastData')),
+        id: Date.now()
+      });
     }
 
     this.form.valueChanges.subscribe((value: Invoice) => {
@@ -137,13 +134,11 @@ export class FormComponent implements OnInit {
     }
 
     if (Object.keys(query).length > 0) {
-      this.router.navigate(['./'],
-        {
-          relativeTo: this.route,
-          queryParams: query,
-          queryParamsHandling: 'merge'
-        }
-      );
+      this.router.navigate(['./'], {
+        relativeTo: this.route,
+        queryParams: query,
+        queryParamsHandling: 'merge'
+      });
     }
   }
 
@@ -154,19 +149,24 @@ export class FormComponent implements OnInit {
       this.addMenu();
     }
 
-    this.route.queryParams.pipe(
-      skip(1),
-      take(1),
-    ).subscribe(params => {
+    this.route.queryParams.pipe(skip(1), take(1)).subscribe(params => {
       const value: any = { menues: [] };
       const p = (key, index) => params[key + String(index + 1)];
       let i = 0;
-      for (; p('title', i) || p('unit', i) || p('unitCost', i) || p('count', i) || p('taxRate', i); i++) {
+      for (
+        ;
+        p('title', i) ||
+        p('unit', i) ||
+        p('unitCost', i) ||
+        p('count', i) ||
+        p('taxRate', i);
+        i++
+      ) {
         value.menues.push({
-          title: p('title', i),
+          title: decodeURIComponent(p('title', i)),
           unit: p('unit', i),
           unitCost: parseInt(p('unitCost', i), 10) || '',
-          count: parseInt(p('count', i), 10) || '',
+          count: parseInt(decodeURIComponent(p('count', i)), 10) || '',
           taxRate: parseInt(p('taxRate', i), 10) || this.defaultTaxRate
         });
       }
