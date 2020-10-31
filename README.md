@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/deer-inc/invoice-generator.svg?branch=master)](https://travis-ci.com/deer-inc/invoice-generator)
-[![Coverage Status](https://coveralls.io/repos/github/deer-inc/invoice-generator/badge.svg?branch=master)](https://coveralls.io/github/deer-inc/invoice-generator?branch=master)
 ![MIT License](https://img.shields.io/github/license/deer-inc/invoice-generator.svg)
 
 
