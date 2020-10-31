@@ -9,50 +9,65 @@ export interface TotalWithTax {
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.scss']
+  styleUrls: ['./invoice.component.scss'],
 })
 export class InvoiceComponent implements OnInit {
-
   @Input() data: Invoice;
 
-  constructor(private invoiceService: InvoiceService) { }
+  constructor(private invoiceService: InvoiceService) {}
 
   get totalCost() {
-    return this.data && this.data.menues
-      .map(menu => menu.count * menu.unitCost)
-      .reduce((pv, cv) => pv + cv, 0);
+    return (
+      this.data &&
+      this.data.menues
+        .map((menu) => menu.count * menu.unitCost)
+        .reduce((pv, cv) => pv + cv, 0)
+    );
   }
 
   get totalTax(): number {
     return this.totalsByTaxRate
-      .map(t => t.tax)
+      .map((t) => t.tax)
       .reduce((pv, cv) => pv + cv, 0);
   }
 
   get totalsByTaxRate(): TotalWithTax[] {
     const totals = {};
     if (this.data) {
-      this.data.menues
-        .map(menu => [menu.taxRate, menu.count * menu.unitCost])
-        .forEach(p => totals[p[0]] = (totals[p[0]] || 0) + p[1]);
+      this.data.menues.forEach((menu) => {
+        totals[menu.taxRate] =
+          (totals[menu.taxRate] || 0) + menu.count * menu.unitCost;
+      });
     }
 
-    return Object.keys(totals).map(rate => {
-      const tr = parseInt(rate, 10);
-      const tc = totals[rate];
-      return {
-        taxRate: tr,
-        totalCost: tc,
-        tax: Math.trunc(tc * tr / 100)
-      };
-    }).sort((a, b) => b.taxRate - a.taxRate);
+    return Object.keys(totals)
+      .map((rate) => {
+        const taxRate = parseInt(rate, 10);
+        const totalCost = totals[rate];
+        let tax: number;
+
+        if (this.data.taxExemption) {
+          tax = Math.floor((totalCost * taxRate) / 100);
+        } else {
+          if (taxRate === 8) {
+            tax = totalCost / 13.5;
+          } else if (taxRate === 10) {
+            tax = totalCost / 11;
+          }
+        }
+
+        return {
+          taxRate,
+          totalCost,
+          tax,
+        };
+      })
+      .sort((a, b) => b.taxRate - a.taxRate);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   setTarget(target: string) {
     this.invoiceService.setTarget(target);
   }
-
 }

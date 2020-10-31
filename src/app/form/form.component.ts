@@ -62,6 +62,7 @@ export class FormComponent implements OnInit {
         zipCode: '',
         streetName: '',
       }),
+      taxExemption: true,
       transferAccount: fb.group(
         {
           bank: ['', Validators.required],

@@ -70,7 +70,7 @@
           type="text"
           autocomplete="off"
           formControlName="limit"
-          [matDatepicker]="limitDp"
+          [matDatepicker]="limitdp"
           required
         />
         <mat-hint>翌月末が一般的です</mat-hint>
@@ -119,6 +119,13 @@
           />
         </mat-form-field>
         <mat-form-field>
+          <mat-label>預金種目</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="普通">普通</mat-option>
+            <mat-option value="当座">当座</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
           <mat-label>口座番号</mat-label>
           <input
             matInput
@@ -130,17 +137,16 @@
             required
           />
         </mat-form-field>
-        <mat-form-field>
-          <mat-label>預金種目</mat-label>
-          <mat-select formControlName="type">
-            <mat-option value="普通">普通</mat-option>
-            <mat-option value="当座">当座</mat-option>
-          </mat-select>
-        </mat-form-field>
       </div>
     </div>
     <div *ngSwitchCase="'menu'">
-      <div class="menu-add">
+      <div class="menu-header">
+        <mat-form-field class="short">
+          <mat-select formControlName="taxExemption">
+            <mat-option [value]="true">外税</mat-option>
+            <mat-option [value]="false">内税</mat-option>
+          </mat-select>
+        </mat-form-field>
         <button mat-icon-button (click)="addMenu()">
           <mat-icon>add</mat-icon>
         </button>
@@ -212,9 +218,6 @@
                 <option value="0">対象外</option>
               </select>
             </mat-form-field>
-            <mat-slide-toggle formControlName="tadExemption">
-              外税
-            </mat-slide-toggle>
           </div>
           <div class="menu-group__action" *ngIf="menues.length > 1">
             <button mat-icon-button (click)="removeMenu(i)">

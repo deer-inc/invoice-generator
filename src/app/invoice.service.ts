@@ -12,6 +12,7 @@ export interface TransferAccount {
   branch: string;
   name: string;
   number: number;
+  type: '普通' | '当座';
 }
 
 export interface Menu {
@@ -40,17 +41,17 @@ export interface Invoice {
   company: Company;
   menues: Menu[];
   note: string;
+  taxExemption: boolean;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InvoiceService {
-
   editTargetSource: Subject<string> = new BehaviorSubject<string>(null);
   editTarget$ = this.editTargetSource.asObservable();
 
-  constructor() { }
+  constructor() {}
 
   setTarget(target: string): void {
     this.editTargetSource.next(target);

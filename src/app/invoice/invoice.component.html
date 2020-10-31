@@ -2,9 +2,16 @@
   <h1>請求書</h1>
   <div class="header">
     <div class="header__left">
-      <div class="editable" (click)="setTarget('client')" [class.invalidGroup]="!data?.client?.name">
+      <div
+        class="editable"
+        (click)="setTarget('client')"
+        [class.invalidGroup]="!data?.client?.name"
+      >
         <h2 class="client">{{ data?.client?.name }}御中</h2>
-        <p class="client-detail" *ngIf="data?.client?.zipCode && data?.client?.streetName">
+        <p
+          class="client-detail"
+          *ngIf="data?.client?.zipCode && data?.client?.streetName"
+        >
           <span class="zipcode">{{ data?.client?.zipCode }}</span>
           <span>{{ data?.client?.streetName }}</span>
         </p>
@@ -12,9 +19,9 @@
       <p>下記の通りご請求申し上げます。</p>
       <table class="summary-table">
         <colgroup>
-          <col style="width: 33.33333%">
-          <col style="width: 33.33333%">
-          <col style="width: 33.33333%">
+          <col style="width: 33.33333%" />
+          <col style="width: 33.33333%" />
+          <col style="width: 33.33333%" />
         </colgroup>
         <thead>
           <tr>
@@ -25,10 +32,13 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{ totalCost | number:'1.0-0' }}円</td>
-            <td>{{ totalTax | number:'1.0-0' }}円</td>
+            <td>{{ totalCost | number: '1.0-0' }}円</td>
+            <td>{{ totalTax | number: '1.0-0' }}円</td>
             <td class="total-cost">
-              {{ totalCost + totalTax | number:'1.0-0' }}円
+              {{
+                totalCost + (data.taxExemption ? totalTax : 0)
+                  | number: '1.0-0'
+              }}円
             </td>
           </tr>
         </tbody>
@@ -37,17 +47,25 @@
         <tbody>
           <tr *ngFor="let i of totalsByTaxRate">
             <th>{{ i.taxRate > 0 ? i.taxRate + '%対象' : '対象外' }}</th>
-            <td>{{ i.totalCost | number:'1.0-0' }}円</td>
+            <td>{{ i.totalCost | number: '1.0-0' }}円</td>
             <th>消費税</th>
-            <td>{{ i.tax | number:'1.0-0' }}円</td>
+            <td>{{ i.tax | number: '1.0-0' }}円</td>
           </tr>
         </tbody>
       </table>
-      <table class="transfer-table editable" (click)="setTarget('transfer')"
-      [class.invalidGroup]="!data?.limit || !data?.transferAccount?.bank || !data?.transferAccount?.name || !data?.transferAccount?.number">
+      <table
+        class="transfer-table editable"
+        (click)="setTarget('transfer')"
+        [class.invalidGroup]="
+          !data?.limit ||
+          !data?.transferAccount?.bank ||
+          !data?.transferAccount?.name ||
+          !data?.transferAccount?.number
+        "
+      >
         <colgroup>
-          <col style="width: 33.33333%">
-          <col>
+          <col style="width: 33.33333%" />
+          <col />
         </colgroup>
         <tbody>
           <tr>
@@ -57,25 +75,44 @@
           <tr>
             <th>振込先</th>
             <td>
-              <span *ngIf="data?.transferAccount?.branch && data?.transferAccount?.bank">{{ data?.transferAccount?.bank }}銀行 {{ data?.transferAccount?.branch }}支店</span>
+              <span
+                *ngIf="
+                  data?.transferAccount?.branch && data?.transferAccount?.bank
+                "
+                >{{ data?.transferAccount?.bank }}銀行
+                {{ data?.transferAccount?.branch }}支店</span
+              >
               <span>{{ data?.transferAccount?.name }}</span>
-              <span>{{ data?.transferAccount?.number }}</span>
+              <span
+                >{{ data?.transferAccount?.type }}
+                {{ data?.transferAccount?.number }}</span
+              >
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="header__right">
-      <dl class="invoice-detail editable" (click)="setTarget('date')" [class.invalidGroup]="!data?.date || !data?.id">
+      <dl
+        class="invoice-detail editable"
+        (click)="setTarget('date')"
+        [class.invalidGroup]="!data?.date || !data?.id"
+      >
         <dt>日付</dt>
         <dd>{{ data?.date | date: 'yyyy年MM月dd日' }}</dd>
         <dt>請求書番号</dt>
         <dd>{{ data?.id }}</dd>
       </dl>
       <p
-        class="company-detail editable" (click)="setTarget('company')"
+        class="company-detail editable"
+        (click)="setTarget('company')"
         [style.background-image]="data?.company?.seal"
-        [class.invalidGroup]="!data?.company?.name || !data?.company?.zipCode || !data?.company?.streetName || !data?.company?.tel"
+        [class.invalidGroup]="
+          !data?.company?.name ||
+          !data?.company?.zipCode ||
+          !data?.company?.streetName ||
+          !data?.company?.tel
+        "
       >
         <span class="company-detail__name">{{ data?.company?.name }}</span>
         <span class="zipcode">{{ data?.company?.zipCode }}</span>
@@ -91,12 +128,16 @@
     </div>
   </div>
   <div class="body">
-    <table class="menues editable" (click)="setTarget('menu')" [class.invalidGroup]="!data?.menues?.length || !data?.menues[0].title">
+    <table
+      class="menues editable"
+      (click)="setTarget('menu')"
+      [class.invalidGroup]="!data?.menues?.length || !data?.menues[0].title"
+    >
       <colgroup>
-        <col>
-        <col style="width: 100px">
-        <col style="width: 150px">
-        <col style="width: 200px">
+        <col />
+        <col style="width: 100px" />
+        <col style="width: 150px" />
+        <col style="width: 200px" />
       </colgroup>
       <thead>
         <tr>
@@ -115,9 +156,21 @@
         </tr>
         <tr *ngFor="let menu of data?.menues">
           <td>{{ menu.title || '&nbsp;' }}</td>
-          <td><span *ngIf="menu.count">{{ (menu.count | number:'1.0-2')}}{{menu.unit}}</span></td>
-          <td><span *ngIf="menu.unitCost">{{ menu.unitCost | number:'1.0-0' }}</span></td>
-          <td><span *ngIf="menu.count && menu.unitCost">{{ menu.count * menu.unitCost | number:'1.0-0' }}</span></td>
+          <td>
+            <span *ngIf="menu.count"
+              >{{ menu.count | number: '1.0-2' }}{{ menu.unit }}</span
+            >
+          </td>
+          <td>
+            <span *ngIf="menu.unitCost">{{
+              menu.unitCost | number: '1.0-0'
+            }}</span>
+          </td>
+          <td>
+            <span *ngIf="menu.count && menu.unitCost">{{
+              menu.count * menu.unitCost | number: '1.0-0'
+            }}</span>
+          </td>
         </tr>
       </tbody>
     </table>
