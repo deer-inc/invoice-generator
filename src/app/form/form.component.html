@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="form" autocomplete = "off">
+<form [formGroup]="form" class="form" autocomplete="off">
   <ng-container [ngSwitch]="target$ | async">
     <div *ngSwitchCase="'date'">
       <mat-form-field>
@@ -130,6 +130,13 @@
             required
           />
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>預金種目</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="普通">普通</mat-option>
+            <mat-option value="当座">当座</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
     <div *ngSwitchCase="'menu'">
@@ -205,6 +212,9 @@
                 <option value="0">対象外</option>
               </select>
             </mat-form-field>
+            <mat-slide-toggle formControlName="tadExemption">
+              外税
+            </mat-slide-toggle>
           </div>
           <div class="menu-group__action" *ngIf="menues.length > 1">
             <button mat-icon-button (click)="removeMenu(i)">
@@ -262,14 +272,44 @@
           />
         </mat-form-field>
         <div class="button-group">
-            <input type="file" (change)="onChangeImage(logoInput.files[0], 'logo')" accept=".png, .jpg" #logoInput hidden>
-          <button type="button" mat-button (click)="logoInput.click()">ロゴを登録</button>
-          <button type="button" mat-button [disabled]="!logoInput.value" (click)="removeImage('logo'); logoInput.value = null">ロゴを削除</button>
+          <input
+            type="file"
+            (change)="onChangeImage(logoInput.files[0], 'logo')"
+            accept=".png, .jpg"
+            #logoInput
+            hidden
+          />
+          <button type="button" mat-button (click)="logoInput.click()">
+            ロゴを登録
+          </button>
+          <button
+            type="button"
+            mat-button
+            [disabled]="!logoInput.value"
+            (click)="removeImage('logo'); logoInput.value = null"
+          >
+            ロゴを削除
+          </button>
         </div>
         <div class="button-group">
-            <input type="file"(change)="onChangeImage(sealInput.files[0], 'seal')" #sealInput hidden accept=".png, .jpg">
-            <button type="button" mat-button (click)="sealInput.click()">印鑑を登録</button>
-            <button type="button" mat-button [disabled]="!sealInput.value" (click)="removeImage('seal'); sealInput.value = null">印鑑を削除</button>
+          <input
+            type="file"
+            (change)="onChangeImage(sealInput.files[0], 'seal')"
+            #sealInput
+            hidden
+            accept=".png, .jpg"
+          />
+          <button type="button" mat-button (click)="sealInput.click()">
+            印鑑を登録
+          </button>
+          <button
+            type="button"
+            mat-button
+            [disabled]="!sealInput.value"
+            (click)="removeImage('seal'); sealInput.value = null"
+          >
+            印鑑を削除
+          </button>
         </div>
       </div>
     </div>

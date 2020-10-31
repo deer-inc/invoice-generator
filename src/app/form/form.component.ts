@@ -5,11 +5,11 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import {
   MAT_DATE_LOCALE,
   DateAdapter,
-  MAT_DATE_FORMATS
+  MAT_DATE_FORMATS,
 } from '@angular/material/core';
 import {
   MomentDateAdapter,
-  MAT_MOMENT_DATE_FORMATS
+  MAT_MOMENT_DATE_FORMATS,
 } from '@angular/material-moment-adapter';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -25,10 +25,10 @@ import { ActivatedRoute, Router } from '@angular/router';
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE]
+      deps: [MAT_DATE_LOCALE],
     },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
-  ]
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+  ],
 })
 export class FormComponent implements OnInit {
   @Output() dataChanged: EventEmitter<Invoice> = new EventEmitter<Invoice>();
@@ -56,21 +56,19 @@ export class FormComponent implements OnInit {
     this.form = fb.group({
       id: Date.now(),
       date: new Date(),
-      limit: moment()
-        .add(1, 'months')
-        .endOf('month')
-        .toDate(),
+      limit: moment().add(1, 'months').endOf('month').toDate(),
       client: fb.group({
         name: ['', Validators.required],
         zipCode: '',
-        streetName: ''
+        streetName: '',
       }),
       transferAccount: fb.group(
         {
           bank: ['', Validators.required],
           name: ['', Validators.required],
           branch: ['', Validators.required],
-          number: ['', Validators.required]
+          number: ['', Validators.required],
+          type: ['普通', Validators.required],
         },
         Validators.required
       ),
@@ -80,16 +78,16 @@ export class FormComponent implements OnInit {
         streetName: ['', Validators.required],
         logo: '',
         tel: ['', Validators.required],
-        seal: ''
+        seal: '',
       }),
       menues: fb.array([]),
-      note: ''
+      note: '',
     });
 
     if (localStorage.getItem('lastData')) {
       this.form.patchValue({
         ...JSON.parse(localStorage.getItem('lastData')),
-        id: Date.now()
+        id: Date.now(),
       });
     }
 
@@ -114,9 +112,9 @@ export class FormComponent implements OnInit {
 
     if (value.menues) {
       let i = 0;
-      value.menues.forEach(menu => {
+      value.menues.forEach((menu) => {
         if (menu && menu.title) {
-          Object.keys(menu).forEach(key => {
+          Object.keys(menu).forEach((key) => {
             query[key + String(i + 1)] = menu[key];
           });
           i++;
@@ -137,7 +135,7 @@ export class FormComponent implements OnInit {
       this.router.navigate(['./'], {
         relativeTo: this.route,
         queryParams: query,
-        queryParamsHandling: 'merge'
+        queryParamsHandling: 'merge',
       });
     }
   }
@@ -149,7 +147,7 @@ export class FormComponent implements OnInit {
       this.addMenu();
     }
 
-    this.route.queryParams.pipe(skip(1), take(1)).subscribe(params => {
+    this.route.queryParams.pipe(skip(1), take(1)).subscribe((params) => {
       const value: any = { menues: [] };
       const p = (key, index) => params[key + String(index + 1)];
       let i = 0;
@@ -167,7 +165,7 @@ export class FormComponent implements OnInit {
           unit: p('unit', i),
           unitCost: parseInt(p('unitCost', i), 10) || '',
           count: parseInt(decodeURIComponent(p('count', i)), 10) || '',
-          taxRate: parseInt(p('taxRate', i), 10) || this.defaultTaxRate
+          taxRate: parseInt(p('taxRate', i), 10) || this.defaultTaxRate,
         });
       }
       this.urlParamCount = i;
@@ -176,7 +174,7 @@ export class FormComponent implements OnInit {
       }
       if (params.for) {
         value.client = {
-          name: params.for
+          name: params.for,
         };
       }
       this.form.patchValue(value);
@@ -191,7 +189,8 @@ export class FormComponent implements OnInit {
           count: '',
           unit: '人日',
           unitCost: 0,
-          taxRate: this.defaultTaxRate
+          taxRate: this.defaultTaxRate,
+          tadExemption: true,
         },
         Validators.required
       )
@@ -214,16 +213,16 @@ export class FormComponent implements OnInit {
 
     this.form.patchValue({
       company: {
-        [target]: safeUrl
-      }
+        [target]: safeUrl,
+      },
     });
   }
 
   removeImage(target: string) {
     this.form.patchValue({
       company: {
-        [target]: null
-      }
+        [target]: null,
+      },
     });
   }
 }
